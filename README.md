@@ -1,92 +1,80 @@
-# Configured Fe
+## vue-json-schema-form
 
-configured-fe
+基于 Vue2 / Vue3、 [JSON Schema](https://json-schema.org/understanding-json-schema/index.html) 生成带完整校验的Form表单，你的 :star2: :star2: :star2: 就是最大的支持
 
-## Getting started
+[查看文档](https://vue-json-schema-form.lljj.me) - [Playground](https://form.lljj.me) - [可视化表单Schema生成器](https://form.lljj.me/schema-generator.html)
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## ui框架支持
+* [vue2 ElementUi](https://github.com/lljj-x/vue-json-schema-form/tree/master/packages/lib/vue2/vue2-form-element)
+* [vue2 Iview3](https://github.com/lljj-x/vue-json-schema-form/tree/master/packages/lib/vue2/vue2-form-iview3)
+* [vue3 Element Plus](https://github.com/lljj-x/vue-json-schema-form/tree/master/packages/lib/vue3/vue3-form-element)
+* [vue3 Antdv](https://github.com/lljj-x/vue-json-schema-form/tree/master/packages/lib/vue3/vue3-form-ant)
+* [vue3 NaiveUi](https://github.com/lljj-x/vue-json-schema-form/tree/master/packages/lib/vue3/vue3-form-naive)
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
-## Add your files
+![](https://lljj-xxxx.oss-cn-hongkong.aliyuncs.com/vue-json-schema-form.gif)
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## 交流群
 
+QQ群：`146845780`，*反应不及时🙄*
+
+**使用问题请优先通过 [Github issue](https://github.com/lljj-x/vue-json-schema-form/issues) 提交**
+
+![](https://lljj-xxxx.oss-cn-hongkong.aliyuncs.com/vjsf11.jpg)
+
+## 如何启动相关编辑器页面
+
+![](https://lljj-xxxx.oss-cn-hongkong.aliyuncs.com/vue-editor.jpg)
+
+* **_活动编辑器项目已经独立了新的仓库，请直接使用 https://github.com/lljj-x/vjsf-demo-editor_**
+* **_活动编辑器项目已经独立了新的仓库，请直接使用 https://github.com/lljj-x/vjsf-demo-editor_**
+
+1、 安装依赖
+```ssh
+yarn install
 ```
-cd existing_repo
-git remote add origin https://git.bilibili.co/datacenter/configured-fe.git
-git branch -M main
-git push -uf origin main
+
+2、 同时运行 `Playground/表单Schema生成器/活动编辑器`
+```ssh
+# Playground http://127.0.0.1:8800/
+# 可视化表单Schema编辑器 http://127.0.0.1:8800/schema-generator.html
+# （H5）活动编辑器 http://127.0.0.1:8800/vue-editor.html
+
+yarn run demo:dev
 ```
 
-## Integrate with your tools
+3、 单个运行（指定entry编译更快）
+```ssh
+# 只运行 Playground
+yarn run demo:dev --dir=index
 
-- [ ] [Set up project integrations](https://git.bilibili.co/datacenter/configured-fe/-/settings/integrations)
+# 只运行 表单Schema生成器
+yarn run demo:dev --dir=schema-generator
 
-## Collaborate with your team
+# 只运行（H5）活动编辑器
+yarn run demo:dev --dir=vue-editor
+```
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+### 说明
+* 遵循 `JSON Schema` 规范，只需要给定 `JSON Schema`，即可生成对应的form表单
+* 快速配置个性化ui视图和校验错误信息，可适配常用的ui库
+* 表单schema校验使用  [ajv](https://github.com/epoberezkin/ajv)
+* 设计思想和对schema解析索引参考 [react-jsonschema-form](https://github.com/rjsf-team/react-jsonschema-form)
 
-## Test and Deploy
+## 相关资料
+[JSON Schema](https://json-schema.org/understanding-json-schema/index.html) |
+[Vue](https://cn.vuejs.org/)
 
-Use the built-in continuous integration in GitLab.
+### 为何开发
+在做前端可视化编辑时，为了解决数据配置表单的通用性，所以使用 `JSON Schema` 描述数据结构，动态生成表单。
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+这样做的好处除了解决在每个配置表单的重复工作，服务端也可以基于同一份schema保持和前端一致的校验规则，不过对于使用 vue elementUi并未找到合适库可以直接使用，所以在后面一段时间决定自己实现一个 。
 
-***
+## 问题或建议
+* [标准 JSON Schema 不支持部分和更新计划](https://vue-json-schema-form.lljj.me/zh/guide/todo.html)
 
-# Editing this README
+有任何使用问题或者建议都可以通过 [Github issue](https://github.com/lljj-x/vue-json-schema-form/issues) 提交给我
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
 
 ## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Apache-2.0
