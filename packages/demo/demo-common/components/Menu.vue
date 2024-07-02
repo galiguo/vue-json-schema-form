@@ -11,12 +11,12 @@
                 index="1"
                 style="display: none;"
             >
-                <a
+                <!-- <a
                     :class="$style.menuLink"
                     href="https://vue-json-schema-form.lljj.me/"
                 >
                     文档
-                </a>
+                </a> -->
             </el-menu-item>
             <el-menu-item index="2">
                 <a
@@ -26,7 +26,7 @@
                     Playground
                 </a>
             </el-menu-item>
-            <el-menu-item
+            <!-- <el-menu-item
                 v-if="$attrs.version==='vue2'"
                 index="3"
             >
@@ -36,7 +36,7 @@
                 >
                     活动编辑器
                 </a>
-            </el-menu-item>
+            </el-menu-item> -->
             <el-menu-item
                 v-if="$attrs.version==='vue2'"
                 index="4"
@@ -48,7 +48,7 @@
                     Schema 生成器
                 </a>
             </el-menu-item>
-            <el-menu-item index="5">
+            <!-- <el-menu-item index="5">
                 <a
                     :class="$style.menuLink"
                     href="https://github.com/lljj-x/vue-json-schema-form"
@@ -56,7 +56,7 @@
                 >
                     Github
                 </a>
-            </el-menu-item>
+            </el-menu-item> -->
         </el-menu>
     </div>
 </template>

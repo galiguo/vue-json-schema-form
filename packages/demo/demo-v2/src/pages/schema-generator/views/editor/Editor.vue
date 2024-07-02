@@ -190,6 +190,7 @@ export default {
 
     computed: {
         formProps() {
+            console.log('右侧表单配置发生变化');
             if (!this.formConfig.formProps) return {};
             return {
                 ...this.formConfig.formProps,
@@ -224,6 +225,7 @@ export default {
         this.$on('onSetCurEditorItem', ({ editorItem }) => {
             this.activeName = editorItem ? 'compConfig' : 'formConfig';
             this.curEditorItem = editorItem;
+            console.log('右侧配置参数json：curEditorItem', this.curEditorItem);
         });
     },
     methods: {
@@ -301,7 +303,7 @@ export default {
                             this.componentList = componentList;
                             if (formConfig.formProps) Object.assign(this.formConfig.formProps, formConfig.formProps);
                             if (formConfig.formFooter) Object.assign(this.formConfig.formFooter, formConfig.formFooter);
-
+                            console.log('导入后的componentList', componentList, this.formConfig, this.rootFormData);
                             instance.close();
 
                             // 存在导入失败的部分节点

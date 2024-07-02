@@ -2,16 +2,15 @@
     <div :class="$style.box">
         <div :class="$style.headerMenuBox">
             <h1>
-                <a
+                <span
                     :class="$style.menuLink"
-                    href="https://vue-json-schema-form.lljj.me/"
                 >
                     <img
                         :class="$style.logo"
                         src="https://vue-json-schema-form.lljj.me/logo.png"
                         alt="Vue JSON Schema Form"
                     >
-                </a>
+                </span>
             </h1>
             <Menu
                 :class="$style.menu"

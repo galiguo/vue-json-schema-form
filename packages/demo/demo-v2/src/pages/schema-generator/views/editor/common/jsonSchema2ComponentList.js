@@ -60,7 +60,7 @@ const errorNode = [];
 
 function getUserConfigByViewSchema(curSchema, toolConfigList) {
     const toolItem = toolConfigList.find(item => viewSchemaMatch(curSchema, item));
-
+    console.log('toolItem', toolItem, curSchema);
     if (toolItem) {
         let componentValue = {};
 
@@ -130,6 +130,7 @@ export default function jsonSchema2ComponentList(code, toolItems) {
     if (String(code).trim() === '') return null;
 
     const toolConfigList = flatToolItems(toolItems);
+    console.log('toolConfigList', toolConfigList);
     const data = JSON.parse(code);
     const {
         schema, formFooter, formProps, /* uiSchema, */
@@ -158,11 +159,14 @@ export default function jsonSchema2ComponentList(code, toolItems) {
             const curObjNode = curSchema.properties ? curSchema : curSchema.items;
 
             // 计算当前节点
+            console.log('curSchema节点：：：', curSchema);
             const curItem = getUserConfigByViewSchema(curSchema, toolConfigList);
+            console.log('计算当前节点curItem', curItem);
 
             // 关联父子
             (getChildList(curSchema)).push(curItem);
             deleteAdditionalData(curSchema);
+            console.log('删除父子后的curSchema', curSchema);
 
             // 处理子节点
             const properties = Object.keys(curObjNode.properties);
