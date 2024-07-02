@@ -1,0 +1,10 @@
+# Dejavu 平台流水线
+# 平台地址：https://dejavu.bilibili.co
+# 使用文档：https://info.bilibili.co/pages/viewpage.action?pageId=671453738
+
+# 参数说明：
+# DEJAVU_GRAPH_ID: 流水线 id
+# DEJAVU_RECORD_ID: 流水线记录 id
+# IDENTITY: 用户登录态
+include:
+  remote: 'http://dejavu.bilibili.co/api/gitlab/template?DEJAVU_GRAPH_ID=${DEJAVU_GRAPH_ID}&DEJAVU_RECORD_ID=${DEJAVU_RECORD_ID}&IDENTITY=${IDENTITY}&ext=.yml'
