@@ -1,7 +1,7 @@
 <template>
     <div :class="$style.container">
         <EditorHeader
-            :show-version="true"
+            :show-version="false"
             default-active="2"
         >
             <div :class="$style.btns">
@@ -53,15 +53,15 @@
                 >
                     <el-option
                         value="top"
-                        label="Label上"
+                        label="标题在上"
                     ></el-option>
                     <el-option
                         value="left"
-                        label="Label左"
+                        label="标题在左"
                     ></el-option>
                     <el-option
                         value="right"
-                        label="Label右"
+                        label="标题在右"
                     ></el-option>
                 </el-select>
                 <el-button

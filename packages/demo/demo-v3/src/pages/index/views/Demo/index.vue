@@ -3,7 +3,7 @@
         <EditorHeader
             default-active="2"
             version="vue3"
-            :show-version="true"
+            :show-version="false"
         >
             <div :class="$style.btns">
                 <template v-if="isUseLabelWidth">
@@ -76,15 +76,15 @@
                 >
                     <el-option
                         value="top"
-                        label="Label上"
+                        label="标题在上"
                     ></el-option>
                     <el-option
                         value="left"
-                        label="Label左"
+                        label="标题在左"
                     ></el-option>
                     <el-option
                         value="right"
-                        label="Label右"
+                        label="标题在右"
                     ></el-option>
                 </el-select>
                 <el-button
