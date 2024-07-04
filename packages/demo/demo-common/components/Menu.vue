@@ -43,7 +43,7 @@
             >
                 <a
                     :class="$style.menuLink"
-                    href="/schema-generator.html#/index"
+                    :href="hostHref"
                 >
                     Schema 生成器
                 </a>
@@ -63,7 +63,12 @@
 
 <script>
 export default {
-    name: 'Menu'
+    name: 'Menu',
+    computed: {
+        hostHref() {
+            return '/configured-fe/menu/schema-generator.html#/index'
+        }
+    }
 };
 </script>
 
