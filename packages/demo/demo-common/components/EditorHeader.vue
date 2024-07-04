@@ -7,8 +7,8 @@
                 >
                     <img
                         :class="$style.logo"
-                        src="https://vue-json-schema-form.lljj.me/logo.png"
-                        alt="Vue JSON Schema Form"
+                        src="https://s1.hdslb.com/bfs/static/fe-mng-index/assets/bilibili-bebf549f.svg"
+                        alt="bilibili 配置化平台"
                     >
                 </span>
             </h1>

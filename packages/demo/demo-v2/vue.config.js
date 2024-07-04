@@ -140,19 +140,19 @@ module.exports = {
             errors: true
         },
         publicPath: '/',
-        proxy: {
-            '/api-dev': {
-                target: 'http://www.api.com',
-                hot: true,
-                open: true,
-                contentBase: false,
-                historyApiFallback: false,
-                changeOrigin: true,
-                pathRewrite: {
-                    '^/api-dev': ''
-                }
-            }
-        }
+        // proxy: {
+        //     '/api-dev': {
+        //         target: 'http://www.api.com',
+        //         hot: true,
+        //         open: true,
+        //         contentBase: false,
+        //         historyApiFallback: false,
+        //         changeOrigin: true,
+        //         pathRewrite: {
+        //             '^/api-dev': ''
+        //         }
+        //     }
+        // }
     },
 
     // https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa

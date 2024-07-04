@@ -248,7 +248,7 @@ uiSchema = {
             },
             style: {
                 // 通过 vue render函数 style 传递给 Widget 组件，只能配置在叶子节点
-                boxShadow: '0 0 6px 2px #2b9939'
+                boxShadow: '0 0 6px 2px #409eff'
             },
             class: {
                 // 0.1.0 版本添加
@@ -464,7 +464,7 @@ export default {
                     'ui:emptyValue': '',
                     'ui:options': {
                         style: {
-                            boxShadow: '0 0 6px 2px #2b9939'
+                            boxShadow: '0 0 6px 2px #409eff'
                         },
                         class: {
                             className_hei: true
