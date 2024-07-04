@@ -5,7 +5,7 @@
             :class="$style.menu"
             mode="horizontal"
             text-color="#333"
-            active-text-color="#2b9939"
+            active-text-color="#409eff"
         >
             <el-menu-item
                 index="1"
@@ -21,7 +21,7 @@
             <el-menu-item index="2">
                 <a
                     :class="$style.menuLink"
-                    href="/"
+                    :href="playgroundHref"
                 >
                     Playground
                 </a>
@@ -65,8 +65,14 @@
 export default {
     name: 'Menu',
     computed: {
+        isProduction() {
+            return location.hostname.includes('berserker.bilibili.co')
+        },
+        playgroundHref() {
+            return this.isProduction ? '/configured-fe/index.html#/index?type=Simple' : '/index.html#/index?type=Simple'
+        },
         hostHref() {
-            return '/configured-fe/menu/schema-generator.html#/index'
+            return this.isProduction ? '/configured-fe/schema-generator.html#/index' : '/schema-generator.html#/index'
         }
     }
 };
