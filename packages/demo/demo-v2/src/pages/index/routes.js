@@ -4,7 +4,7 @@
 
 const routes = [
     {
-        path: '/demo',
+        path: '/index',
         name: 'demo',
         meta: {
             title: 'Demo'
