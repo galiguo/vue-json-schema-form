@@ -130,13 +130,13 @@
                     :span="16"
                 >
                     <el-row :gutter="6">
-                        <el-col :span="10">
+                        <el-col :span="12">
                             <CodeEditor
                                 v-model="curFormDataCode"
                                 title="FormData"
                             ></CodeEditor>
                         </el-col>
-                        <el-col :span="14">
+                        <el-col :span="12">
                             <CodeEditor
                                 v-model="curSchemaCode"
                                 title="Schema"
