@@ -35,7 +35,7 @@ const outputDir = path.resolve(__dirname, './dist');
 
 module.exports = {
     // cdn
-    publicPath: isProduction ? '/' : '/',
+    publicPath: isProduction ? './' : '/',
 
     // 资源目录
     outputDir,
