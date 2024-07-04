@@ -35,7 +35,7 @@ const outputDir = isProduction ? path.resolve(__dirname, './dist/v3') : path.res
 
 module.exports = {
     // cdn
-    publicPath: isProduction ? '/v3' : '/',
+    publicPath: isProduction ? './v3' : '/',
 
     // 资源目录
     outputDir,
