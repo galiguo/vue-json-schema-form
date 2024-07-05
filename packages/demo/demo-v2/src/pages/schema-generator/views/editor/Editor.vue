@@ -1,7 +1,7 @@
 <template>
     <div v-loading="loading">
         <EditorHeader default-active="4">
-            <el-button @click="handleImportSchema">导入Schema</el-button>
+            <!-- <el-button @click="handleImportSchema">导入Schema</el-button> -->
             <el-button
                 plain
                 @click="handleToDemo"
@@ -353,8 +353,8 @@ export default {
                 pre.push(`${cur}=${encodeURIComponent(JSON.stringify(codeObj[cur]))}`);
                 return pre;
             }, []).join('&');
-
-            const link = `/index.html#/demo?type=Test&${urlQueryString}`;
+            const isProduction = location.hostname.includes('berserker.bilibili.co')
+            const link = isProduction ? `/configured-fe/index.html#/demo?type=Test&${urlQueryString}` : `/index.html#/demo?type=Test&${urlQueryString}`;
             openNewPage(link, '_specialViewForm');
         }
     }
