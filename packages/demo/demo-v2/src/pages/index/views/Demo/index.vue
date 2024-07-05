@@ -5,7 +5,7 @@
             default-active="2"
         >
             <div :class="$style.btns">
-                <span style="font-size: 13px;">标签：</span>
+                <span style="font-size: 13px;">标签宽度：</span>
                 <el-slider
                     v-model="formProps.labelWidth"
                     style="width: 70px; margin-right: 6px;"
@@ -17,14 +17,14 @@
                     style="margin-right: 6px;"
                     size="small"
                 >
-                    Inline
+                    行内
                 </el-checkbox>
                 <el-checkbox
                     v-model="formFooter.show"
                     style="margin-right: 6px;"
                     size="small"
                 >
-                    底部
+                    操作栏
                 </el-checkbox>
                 <el-select
                     v-model="formProps.layoutColumn"
@@ -49,19 +49,19 @@
                     v-model="formProps.labelPosition"
                     placeholder="对其"
                     size="small"
-                    style="margin-right: 6px;width: 96px;"
+                    style="margin-right: 6px;width: 106px;"
                 >
                     <el-option
                         value="top"
-                        label="标题在上"
+                        label="标签居上"
                     ></el-option>
                     <el-option
                         value="left"
-                        label="标题在左"
+                        label="标签居左"
                     ></el-option>
                     <el-option
                         value="right"
-                        label="标题在右"
+                        label="标签居右"
                     ></el-option>
                 </el-select>
                 <el-button
