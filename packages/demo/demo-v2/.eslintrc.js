@@ -18,6 +18,9 @@ module.exports = {
     rules: {
         // 递归组件导致了循环依赖
         'import/no-cycle': 'off',
+        'max-line-length': 'off',
+        "no-restricted-globals": 'off',
+        "semi": 'off'
     },
     globals: {
         'self': true
@@ -27,6 +30,9 @@ module.exports = {
             files: ["*.vue"],
             rules: {
                 "indent": "off",
+                'max-line-length': 'off',
+                "no-restricted-globals": 'off',
+                "semi": 'off'
             }
         }
     ]
