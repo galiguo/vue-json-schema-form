@@ -68,7 +68,7 @@
                     icon="el-icon-share"
                     type="primary"
                     size="small"
-                    @click="handlePreview"
+                    @click="handlePreview($event)"
                 >
                     分享
                 </el-button>
@@ -198,6 +198,7 @@
 import EditorHeader from 'demo-common/components/EditorHeader.vue';
 import CodeEditor from 'demo-common/components/CodeEditorV2';
 import schemaTypes from 'demo-common/schemaTypes';
+import clip from 'demo-common/utils/clipboard'
 
 const VueElementForm = () => import('@lljj/vue-json-schema-form');
 
@@ -395,24 +396,8 @@ export default {
         handleSubmit() {
             console.log('Submit');
         },
-        clipboard(value) {
-            if (document.execCommand) {
-                const input = document.createElement('input');
-                document.body.appendChild(input);
-                input.setAttribute('value', value);
-                input.select();
-
-                document.execCommand('copy');
-                document.body.removeChild(input);
-
-                return true;
-            }
-
-            this.$message.info(value);
-            return false;
-        },
         handleCancel() {},
-        handlePreview() {
+        handlePreview(e) {
             const formatStr = jsonCode => JSON.stringify(JSON.parse(jsonCode));
 
             const genRoute = this.$router.resolve({
@@ -429,9 +414,7 @@ export default {
             });
             const url = `${window.location.origin}${window.location.pathname}${genRoute.href}`;
 
-            if (this.clipboard(url)) {
-                this.$message.success('复制预览地址成功');
-            }
+            clip(url, e)
         }
     }
 };
