@@ -79,7 +79,7 @@ export default {
             return editorItem.childList && !editorItem.componentPack.viewSchema.format;
         },
         handleDragChange(...args) {
-            console.log(args);
+            console.log('拖入change事件：：', args);
         },
         // 计算各个组件状态栏按钮状态
         computedComponentToolBarStatus() {
