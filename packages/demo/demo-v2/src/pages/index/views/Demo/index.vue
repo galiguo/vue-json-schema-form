@@ -76,30 +76,33 @@
         </EditorHeader>
         <div :class="$style.box">
             <div :class="$style.typeList">
-                <router-link
-                    v-for="item in typeItems"
-                    :key="item"
-                    v-slot="{ href, route, navigate, isActive, isExactActive }"
-                    :class="{
-                        [$style.linkItem]: true,
-                        [$style.active]: item === curType
-                    }"
-                    :to="{
-                        name: 'demo',
-                        query: {
-                            ui: curVueForm,
-                            type: item
-                        }
-                    }"
-                >
-                    <el-button
-                        :type="item === curType ? 'primary' : ''"
-                        size="small"
-                        @click="navigate"
+                <el-row v-for="(mod, modIndex) in schemaTypes" :key="modIndex">
+                    <span :class="$style.modulesTitle">{{ mod.text }}:</span>
+                    <router-link
+                        v-for="(item, iIndex) in mod.modules"
+                        :key="iIndex"
+                        v-slot="{ href, route, navigate, isActive, isExactActive }"
+                        :class="{
+                            [$style.linkItem]: true,
+                            [$style.active]: iIndex === curType
+                        }"
+                        :to="{
+                            name: 'demo',
+                            query: {
+                                ui: curVueForm,
+                                type: iIndex
+                            }
+                        }"
                     >
-                        {{ item }}
-                    </el-button>
-                </router-link>
+                        <el-button
+                            :type="iIndex === curType ? 'primary' : ''"
+                            size="small"
+                            @click="navigate"
+                        >
+                            {{ iIndex }}
+                        </el-button>
+                    </router-link>
+                </el-row>
             </div>
             <el-row :gutter="25">
                 <el-col
@@ -226,6 +229,7 @@ export default {
     data() {
         return {
             typeItems,
+            schemaTypes,
             curVueForm: this.$route.query.ui || 'VueElementForm',
             ...this.getDefaultSchemaMap(),
             formComponents: [{
@@ -382,10 +386,20 @@ export default {
                 ...defaultState.formProps,
                 ...(queryParamsObj.formProps || {})
             };
-
-            Object.assign(this, defaultState, Object.assign(schemaTypes[this.curType], queryParamsObj, {
+            const moduleType = this.getModuleByCurType()
+            Object.assign(this, defaultState, Object.assign(schemaTypes[moduleType]?.modules?.[this.curType], queryParamsObj, {
                 formProps
             }));
+        },
+        getModuleByCurType() {
+            let moduleType = ''
+            for (let i in schemaTypes) {
+                let typeItems = Object.keys(schemaTypes[i].modules)
+                if (typeItems.includes(this.curType)) {
+                    moduleType = i
+                }
+            }
+            return moduleType
         },
         handleFormMounted(formRef) {
             console.log('Ui form component:', formRef);
@@ -415,6 +429,21 @@ export default {
             const url = `${window.location.origin}${window.location.pathname}${genRoute.href}`;
 
             clip(url, e)
+            if (this.clipboard(url)) {
+                this.$message.success('复制预览地址成功');
+            }
+        },
+        setComponentOtherFnc(val) {
+            const schemas = JSON.parse(val)
+            console.log('val', schemas)
+            for (let i in schemas.properties) {
+                const config = schemas.properties[i]
+                if (config.needRemote && config.api?.uri) {
+                    this.$nextTick(() => {
+                        this.sendQuest(config)
+                    })
+                }
+            }
         }
     }
 };
@@ -431,6 +460,11 @@ export default {
     }
     .typeList {
         padding: 15px 0 20px;
+    }
+    .modulesTitle {
+        margin-right: 10px;
+        font-size: 14px;
+        color: #606266;
     }
     .linkItem {
         margin-right: 8px;

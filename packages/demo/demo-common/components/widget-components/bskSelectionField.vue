@@ -15,7 +15,7 @@
         <el-select
           v-model="table"
           :filterable="selectConfig.filterable"
-          remote
+          :remote="!schema.localMethod && schema.needRemote"
           value-key="value"
           :size="selectConfig.size"
           :clearable="selectConfig.clearable"
@@ -40,9 +40,10 @@ import {
   formUtils,
   schemaValidate
 } from '@lljj/vue-json-schema-form'
-// import http from '@/lib/http'
+import http from 'demo-common/utils/http'
 import debounce from 'lodash/debounce'
-// import { remoteDataMap } from '@/lib/remoteDatamap'
+import { remoteDataMap } from 'demo-common/utils/remoteDatamap'
+
 export default {
   name: 'bskSelectionField',
   props: {
@@ -94,13 +95,22 @@ export default {
         // vueUtils.setPathVal(this.rootFormData, vueUtils.computedCurPath(this.curNodePath, 'table'), value)
         return this.$set(this.rootFormData, 'table', value)
       }
+    },
+    localMethod() {
+      return this.schema.localMethod || false
     }
   },
   created() {
   },
+  mounted() {
+    this.handlerRequestApi()
+  },
   watch: {
     hasClearFlag(val) {
       val && (this.optionList = [])
+    },
+    localMethod(val) {
+      this.handlerRequestApi()
     }
   },
   methods: {
@@ -135,7 +145,7 @@ export default {
             hide: true
           }).then((resp) => {
             const resulet = resp[apiObj.res] || []
-            // this.optionList = remoteDataMap(resulet, apiObj?.option, this.options) // 需要处理映射
+            this.optionList = remoteDataMap(resulet, apiObj?.option, this.options) // 需要处理映射
           })
         } else {
           this.optionList = []
@@ -143,8 +153,38 @@ export default {
       })
     },
     getRemoteList: debounce(function (value) {
-      this.handlerApi(value)
-    }, 300)
+      if (!this.schema.localMethod && this.schema.needRemote) {
+        this.handlerApi(value)
+      }
+    }, 300),
+    handlerRequestApi() {
+      if (this.selectConfig) {
+        const { localMethod = false } = this.schema
+        if (localMethod) {
+          // 立刻请求接口获取下拉框内容
+          this.$nextTick(() => {
+            this.sendQuest(this.schema)
+          })
+        }
+      }
+    },
+    sendQuest(config) {
+        const apiObj = config.api || {}
+        if (!apiObj.uri) {
+            return
+        }
+        const url = apiObj.uri
+        // TODO: 获取数据前先置空,是否需要待测试！
+        Object.assign(config, {
+            'ui:enumOptions': []
+        })
+        return http[apiObj.method](url).then((resp) => {
+            const resulet = resp[apiObj.res] || []
+            Object.assign(config, {
+            'ui:enumOptions': remoteDataMap(resulet, apiObj?.option) // 需要处理映射
+            })
+        })
+    }
   }
 }
 </script>
